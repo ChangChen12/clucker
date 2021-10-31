@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def combine(self,a,b):
         return a + "_" + b
 
-    def handle(self, *args, **options):
+    def handle(self,*args, **options):
         print("generating 100 random users.")
         self.__init__()
         try:
@@ -21,11 +21,11 @@ class Command(BaseCommand):
                 print("@" + self.combine(first_name,last_name))
                 user = User.objects.create_user(
                 username = "@" + self.combine(first_name,last_name),
-                first_name = first_name,
-                last_name = last_name,
-                email = self.faker.unique.email(),
-                password = self.faker.unique.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True),
-                bio = self.faker.unique.text())
+                    first_name = first_name,
+                    last_name = last_name,
+                    email = self.faker.unique.email(),
+                    password = self.faker.unique.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True),
+                    bio = self.faker.unique.text())
                 user.full_clean()
                 user.save()
         except ValidationError:
